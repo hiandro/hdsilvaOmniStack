@@ -1,7 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { Notifications } from 'expo';
+import * as Permissions from 'expo-permissions';
 import { View, FlatList, Image, Text, TouchableOpacity } from 'react-native';
+import registerForPushNotifications from '../../services/registerForPushNotifications';
 
 import api from '../../services/api';
 
@@ -46,6 +49,7 @@ export default function Incidents() {
 
   useEffect(() => {
     loadIncidents();
+    registerForPushNotifications();
   }, []);
 
   function formatReal (value) {
@@ -57,7 +61,11 @@ export default function Incidents() {
 
     return formatter.format(value);
 }
+
+
  
+
+
   return (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -65,6 +73,13 @@ export default function Incidents() {
         <Text style={styles.headerText}>
           Total de <Text style={styles.headerTextBold}>{total} casos</Text>.
         </Text>
+
+        <TouchableOpacity onPress={() =>{}}>  
+        
+        <Feather name="bell" size={16} color="#E02041" />     
+                  
+          
+        </TouchableOpacity>
       </View>
 
       <Text style={styles.title}>Bem-vindo!</Text>
